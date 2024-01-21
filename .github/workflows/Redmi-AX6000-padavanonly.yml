@@ -105,10 +105,14 @@ jobs:
         cd openwrt
         echo -e "$(nproc) thread compile"
         make -j$(nproc) || make -j1 || make -j1 V=s
-        grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
+        #grep '^CONFIG_TARGET.*DEVICE.*=y' .config：这部分命令会在.config文件中搜索所有以CONFIG_TARGET开头，包含DEVICE，并以=y结尾的行。这些行通常表示已启用的设备配置。sed -r 's/.*DEVICE_(.*)=y/\1/'：这部分命令会处理grep命令的输出。它使用sed命令的替换功能，将每一行中的DEVICE_和=y之间的部分提取出来。这部分通常是设备的名称。
+        grep '^CONFIG_TARGET_DEVICE_.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
         [ -s DEVICE_NAME ] && echo "DEVICE_NAME=$(cat DEVICE_NAME)" >> $GITHUB_ENV
+        echo "DEVICE_NAME: $(cat DEVICE_NAME)"  # 输出DEVICE_NAME
+        #grep '^CONFIG_TARGET.*DEVICE.*=y' .config：这部分命令会在.config文件中搜索所有以CONFIG_TARGET开头，包含DEVICE，并以=y结尾的行。这些行通常表示已启用的设备配置。sed -r 's/.*TARGET_.*_(.*)_DEVICE_.*=y/\1/'：这部分命令会处理grep命令的输出。它使用sed命令的替换功能，将每一行中的TARGET_和_DEVICE_之间的部分提取出来。这部分通常是目标平台的名称。
         grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*TARGET_.*_(.*)_DEVICE_.*=y/\1/' > TARGET_NAME
         [ -s TARGET_NAME ] && echo "TARGET_NAME=$(cat TARGET_NAME)" >> $GITHUB_ENV
+        echo "TARGET_NAME: $(cat TARGET_NAME)"  # 输出TARGET_NAME
         echo "FILE_DATE=$(date +"%Y.%m.%d-%H%M")" >> $GITHUB_ENV
         echo "status=success" >> $GITHUB_OUTPUT
         
