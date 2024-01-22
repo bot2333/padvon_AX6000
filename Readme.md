@@ -1,3 +1,9 @@
+# What's New:
+
+GitHub代码更新后导致Fork源代码无法运行，总是报错；整体逻辑没有问题，只有编译后改名以及标签命名等问题存在错误导致无法顺利完成云编译，本地编译没有问题。
+所以在Fork源代码后进行了相应的修改得到现在这个版本，只需要Fork我这个仓库过去，直接选择Actions，左边的Redmi-AX6000-padavanonly.yml，选中后在右侧会出现Runworkflow，直接运行，等待大约3-4小时，固件编译完成后会自动上传到Release。
+
+
 # 借助 GitHub Actions 的 OpenWrt 在线自动编译.
 
 OpenWrt官方有过三种分区固件：OpenWrt stock layout、OpenWrt layout和OpenWrt U-Boot layout。
