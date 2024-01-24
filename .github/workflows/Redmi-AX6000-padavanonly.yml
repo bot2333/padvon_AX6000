@@ -140,9 +140,10 @@ jobs:
       run: |
         echo "release_tag=${{ env.FILE_DATE }}_${{ env.OPENWRT_NAME }}_${{ env.DEVICE_NAME }}" | tr -d '-' | tr '[:upper:]' '[:lower:]' >> $GITHUB_OUTPUT
         touch release.txt
-        echo "推荐使用Uboot刷入，固件选择sysupgrade类型，默认地址192.168.2.1，用户名root，密码为空。通过Uboot刷入，闪存布局选择(immortalwrt ubi 110MB);如果是stock固件，则选择闪存默认布局方案" >> release.txt
-        echo "固件仓库地址为https://github.com/padavanonly/immortalwrt-mt798x，如果仓库有更新，会不定期再编译。" >> release.txt
-        echo "📥 固件下载" >> release.txt
+        echo "推荐使用Uboot刷入，固件选择sysupgrade类型，默认地址192.168.2.1，用户名root，密码为空。" >> release.txt
+        echo "固件仓库地址为https://github.com/padavanonly/immortalwrt-mt798x" >> release.txt
+        echo "如果仓库有更新，会不定期再编译。" >> release.txt
+        echo "📥 固件下载：通过Uboot刷入，闪存布局选择(immortalwrt ubi 110MB);如果是stock固件，则选择闪存默认布局方案" >> release.txt
         echo "status=success" >> $GITHUB_OUTPUT
         
     - name: 发布至release
