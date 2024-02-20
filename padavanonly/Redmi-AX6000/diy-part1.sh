@@ -13,17 +13,20 @@
 # Uncomment a feed source
 #sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
 
+rm -rf feeds/packages/lang/golang
+git clone https://github.com/sbwml/packages_lang_golang -b 21.x feeds/packages/lang/golang
+
 # Add a feed source
 #echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
 #echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
 ./scripts/feeds update -a && ./scripts/feeds install -a
-sed -i '$a src-git mosdns https://github.com/sbwml/luci-app-mosdns' feeds.conf.default
-sed -i '$a src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
-sed -i '$a src-git small https://github.com/kenzok8/small' feeds.conf.default
+
+sed -i '$a src-git small8 https://github.com/kenzok8/small-package' feeds.conf.default
 
 ./scripts/feeds update -a
-./scripts/feeds install -a -f -p kenzo
-./scripts/feeds install -a -f -p small
+./scripts/feeds install -a -f -p small8
+
+
 
 ./scripts/feeds uninstall luci-app-mosdns mosdns v2ray-geodata
 ./scripts/feeds install -f -p mosdns mosdns luci-app-mosdns
