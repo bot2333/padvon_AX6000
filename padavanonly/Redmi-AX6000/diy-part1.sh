@@ -10,18 +10,8 @@
 # Description: OpenWrt DIY script part 1 (Before Update feeds)
 #
 
-# Uncomment a feed source
-#sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
-
-rm -rf feeds/packages/lang/golang
-git clone https://github.com/sbwml/packages_lang_golang -b 21.x feeds/packages/lang/golang
-
 # Add a feed source
 #echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
-#echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
-./scripts/feeds update -a && ./scripts/feeds install -a
+#echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >> install -a
+sed -i '$a src-git smpackage https://github.com/kenzok8/small-package' feeds.conf.default
 
-sed -i '$a src-git small8 https://github.com/kenzok8/small-package' feeds.conf.default
-
-./scripts/feeds update -a
-./scripts/feeds install -a -f -p small8
